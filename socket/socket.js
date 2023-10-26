@@ -1,5 +1,6 @@
 const http = require("http");
 const redis = require("redis");
+const ChatRoom = require("../chatroom/chatroom");
 var redisClient = redis.createClient({
     host: process.env.REDIS_HOST,
     port: process.env.REDIS_PORT,
@@ -28,6 +29,7 @@ class Socket {
             const onlineUsers = {};
             this.socket = socket;
             console.log(`User connected: ${socket.id}`);
+            ChatRoom.initChatRoom(this.socket, this.io);
             // TicTacToe.gamefunction(this.socket, this.io);
             // Dice.gamefunction(this.socket, this.io);
             // Chess.gamefunction(this.socket, this.io);
