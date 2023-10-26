@@ -1,5 +1,5 @@
 const AppSocket = require("./socket/socket");
-
+const config = require("./config/env.config");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
