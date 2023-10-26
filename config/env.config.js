@@ -1,5 +1,5 @@
 module.exports = {
-    "port": 3001,
+    "port": 3009,
     "appEndpoint": "http://localhost:3001",
     "apiEndpoint": "http://localhost:3001",
     "jwt_secret": "myS33!!creeeT",
