@@ -25,13 +25,20 @@ class Socket {
         this.io = require("socket.io")(this.server);
         this.init = true;
         this.io.on("connection", (socket) => {
+            const onlineUsers = {};
             this.socket = socket;
+            console.log(`User connected: ${socket.id}`);
             // TicTacToe.gamefunction(this.socket, this.io);
             // Dice.gamefunction(this.socket, this.io);
             // Chess.gamefunction(this.socket, this.io);
             // Scrabble.gamefunction(this.socket, this.io);
             // Ludo.gamefuntion(this.socket, this.io);
             // Snooker.gamefuntion(this.socket, this.io);
+            socket.on("disconnect", () => {
+                // When a user disconnects
+                console.log(`User disconnected: ${socket.id}`);
+              //  delete onlineUsers[socket.id];
+              });
         });
         callback(this.server);
     }
