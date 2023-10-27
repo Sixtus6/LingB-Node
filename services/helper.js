@@ -1,4 +1,4 @@
-const { getRedis } = require("./redis.utils");
+const { getRedis, saveRedis } = require("./redis.utils");
 
 
 
@@ -14,11 +14,12 @@ module.exports = {
                     const user = chatroom.users.find((u) => u.socketID === socketID);
                     if (user) {
                         user.status = 'offline';
+                        await saveRedis(chatroom);
                     }
-                    console.log(user, chatroom, index);
+                    // console.log(user, chatroom, index);
                 }
-                
-            
+
+
             }
         } catch (error) {
             console.log(error)

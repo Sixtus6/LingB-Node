@@ -19,6 +19,7 @@ class ChatRoom {
                     };
                 }
             };
+            
             let user = {
                 socketID: socket.id,
                 userName: username,
@@ -26,6 +27,7 @@ class ChatRoom {
                 status: "online",
                 messages: []
             };
+
             chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
             const roomids = await getRedis("roomids") ?? [];
@@ -33,11 +35,7 @@ class ChatRoom {
             await saveAllRoomID(roomids);
             const chatroom = await getRedis(chatRoomModel.roomid);
             const allrooms = await getRedis("roomids");
-
             console.log(chatroom, allrooms)
-
-
-
         })
 
 
