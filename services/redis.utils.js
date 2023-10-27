@@ -23,7 +23,22 @@ module.exports = {
         }
     },
 
-    save
+    saveAllRoomID: async function () {
+        try {
+            if (!isconnected) {
+                (async () => {
+                    await redisClient.connect();
+                })();
+                isconnected = true;
+                console.log(`connected successfully to Redis`);
+            } else { }
+            const value = JSON.stringify(data);
+            await redisClient.set("allroomid", value);
+            console.log("save ids to redis")
+        } catch (error) {
+            console.log(error)
+        }
+    },
 
     getRedis: async function (key) {
         const sessionData = JSON.parse(
