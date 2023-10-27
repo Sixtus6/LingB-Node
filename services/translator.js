@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { googleapi } = require('../key');
-const apiKey = 'your-api-key'; // Replace with your actual API key
+const apiKey = googleapi; // Replace with your actual API key
 const text = 'Hello, World!';
 const targetLanguage = 'es';
 
