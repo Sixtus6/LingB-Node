@@ -27,10 +27,13 @@ class ChatRoom {
             };
             chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
-            const roomids = [];
+            const roomids =  await getRedis("roomids") ?? [];
             roomids.push(chatRoomModel.roomid);
-            await saveAllRoomID()
+            await saveAllRoomID(roomids);
             const chatroom = await getRedis(chatRoomModel.roomid);
+            const allrooms = await getRedis("roomids");
+
+            console.log(chatroom, allrooms)
 
 
 

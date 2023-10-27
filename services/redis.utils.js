@@ -33,7 +33,7 @@ module.exports = {
                 console.log(`connected successfully to Redis`);
             } else { }
             const value = JSON.stringify(data);
-            await redisClient.set("allroomid", value);
+            await redisClient.set("roomids", value);
             console.log("save ids to redis")
         } catch (error) {
             console.log(error)
