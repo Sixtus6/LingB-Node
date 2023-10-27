@@ -69,9 +69,19 @@ class ChatRoom {
             io.to(chatroom.roomid).emit("room-msg", chatroom);
         })
 
-        /* -------------------------------- chat room ------------------------------- */
+        /* ---------------------------chat-room----- chat room ------------------------------- */
         socket.on("chat-room", async ({ roomid, message, socketid }) => {
+            let chatroom = await getRedis(roomid);
+            if (!chatroom) {
+                socket.emit(
+                    "chat-room-error",
+                    "Chatroom id is invalid"
+                );
+                return
+            }
+            const user = chatroom.users.find((u) => u.socketID === socketid);
 
+            
         })
 
 
