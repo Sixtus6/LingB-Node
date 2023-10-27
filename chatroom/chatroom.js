@@ -53,7 +53,7 @@ class ChatRoom {
                 );
                 return
             }
-            console.log(chatroom)
+         
 
             let user = {
                 socketID: socket.id,
@@ -65,8 +65,10 @@ class ChatRoom {
             chatroom.users.push(user);
             chatroom.activeusers.count = chatroom.users.length
             await saveRedis(chatroom);
+            
             socket.join(chatroom.roomid);
-            io.to(chatroom.roomid).emit("room-msg", chatroom);
+            io.to(chatroom.roomid).emit("join-room-msg", chatroom.users);
+            console.log(chatroom)
         })
 
         /* ---------------------------chat-room----- chat room ------------------------------- */
@@ -87,11 +89,15 @@ class ChatRoom {
                 );
             }
             let mssg = {
-                eng: message
-                igbo:
+                eng: message,
+                igbo: "",
+                hausa: ""
             }
-            user.messages.push(message);
+            user.messages.push(mssg);
             console.log(user)
+            await saveRedis(chatroom);
+            socket.join(chatroom.roomid);
+            io.to(chatroom.roomid).emit("room-msg", chatroom);
         })
 
 
