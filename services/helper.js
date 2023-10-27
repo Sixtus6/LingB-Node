@@ -8,19 +8,17 @@ module.exports = {
         try {
             const allrooms = await getRedis("roomids");
             if (allrooms) {
-                allrooms.forEach(async (element, index) => {
+                for (let index = 0; index < allrooms.length; index++) {
+                    const element = allrooms[index];
                     let chatroom = await getRedis(element);
                     const user = chatroom.users.find((u) => u.socketID === socketID);
-                    console.log(chatroom.users.socketID)
-                    if (chatroom.users.socketID == socketID) {
-
-                        console.log(index)
-
+                    if (user) {
+                        user.status = 'offline';
                     }
-                  
-                    // let offlineUser = chatroom.users.find((u) => u.socketID === socketID);
-                    // console.log(offlineUser);
-                });
+                    console.log(user, chatroom, index);
+                }
+                
+            
             }
         } catch (error) {
             console.log(error)
