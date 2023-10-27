@@ -20,15 +20,15 @@ class ChatRoom {
                 }
             };
 
-            let user = {
-                socketID: socket.id,
-                userName: username,
-                language: language,
-                status: "online",
-                messages: []
-            };
+            // let user = {
+            //     socketID: socket.id,
+            //     userName: username,
+            //     language: language,
+            //     status: "online",
+            //     messages: []
+            // };
 
-            chatRoomModel.users.push(user);
+            // chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
             const roomids = await getRedis("roomids") ?? [];
             roomids.push(chatRoomModel.roomid);
