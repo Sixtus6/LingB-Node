@@ -1,5 +1,6 @@
 const md5 = require("md5");
 const { generateid } = require("../services/generateid");
+const { saveRedis } = require("../services/redis.utils");
 
 
 class ChatRoom{
@@ -7,10 +8,9 @@ class ChatRoom{
     static initChatRoom(socket, io) {
        // console.log(`User  ${socket.id}`);
         socket.on("create-room", async ({ username, language }) => {
-            var id = generateid(100000, 999999);
-
+           
             const chatRoomModel = {
-                chatid: md5(id + username),
+                roomid: md5(generateid(100000, 999999) + username),
                 users: [],
             };
             let user = {
@@ -20,9 +20,10 @@ class ChatRoom{
                 messages: []
             };
             chatRoomModel.users.push(user);
-            
+             await saveRedis()
+
             console.log(chatRoomModel)
-            console.log(username, language, id);
+            console.log(username, language,);
 
             console.log(`User connected created a room: ${socket.id}`);
 

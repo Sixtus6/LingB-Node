@@ -5,8 +5,17 @@ var redisClient = redis.createClient({
 });
 
 module.exports = {
-    saveRedis: async function (key, data) {
-        const value = JSON.stringify(gameModel);
-        await redisClient.set(gameModel.gameid, value);
+    saveRedis: async function (data) {
+        const value = JSON.stringify(data);
+        await redisClient.set(data.roomid, value);
+        console.log("save to redis")
+    },
+
+    getRedis: async function (data) {
+        const sessionData = JSON.parse(
+            await redisClient.get(data.roomid)
+        );
+        console.log("retrive from redis")
+        return sessionData;
     }
 }
