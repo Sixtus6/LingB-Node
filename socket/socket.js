@@ -10,14 +10,14 @@ class Socket {
 
     constructor() {
         this.init = false;
-        if (!isconnected) {
+        // if (!isconnected) {
 
-            (async () => {
-                await redisClient.connect();
-            })();
-            isconnected = true;
-            console.log(`connected successfully to Redis`);
-        } else { }
+        //     (async () => {
+        //         await redisClient.connect();
+        //     })();
+        //     isconnected = true;
+        //     console.log(`connected successfully to Redis`);
+        // } else { }
     }
 
     initSocket(app, callback) {
