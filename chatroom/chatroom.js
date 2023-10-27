@@ -62,7 +62,8 @@ class ChatRoom {
             chatroom.users.push(user);
             chatroom.activeusers.count = chatroom.users.length
             await saveRedis(chatroom);
-            console.log(chatroom);
+            socket.join(chatroom.roomid);
+            io.to(chatroom.roomid).emit("room-msg", chatroom);
         }
 
         )
