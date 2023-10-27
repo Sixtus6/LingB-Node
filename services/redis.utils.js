@@ -23,7 +23,7 @@ module.exports = {
         }
     },
 
-    saveAllRoomID: async function () {
+    saveAllRoomID: async function (data) {
         try {
             if (!isconnected) {
                 (async () => {

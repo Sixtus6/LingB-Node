@@ -1,6 +1,6 @@
 const md5 = require("md5");
 const { generateid } = require("../services/generateid");
-const { saveRedis, getRedis } = require("../services/redis.utils");
+const { saveRedis, getRedis, saveAllRoomID } = require("../services/redis.utils");
 
 
 class ChatRoom {
@@ -27,7 +27,12 @@ class ChatRoom {
             };
             chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
+            const roomids = [];
+            roomids.push(chatRoomModel.roomid);
+            await saveAllRoomID()
             const chatroom = await getRedis(chatRoomModel.roomid);
+
+
 
         })
 
