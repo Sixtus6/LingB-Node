@@ -40,7 +40,7 @@ class ChatRoom {
 
 
         })
-
+/* -------------------------------- join room ------------------------------- */
         socket.on("join-room", async ({ username, language, roomid }) => {
             let chatroom = await getRedis(roomid);
             if (!chatroom) {
@@ -67,6 +67,8 @@ class ChatRoom {
         }
 
         )
+
+
 
         socket.on("disconnect", () => {
             // When a user disconnects
