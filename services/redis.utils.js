@@ -51,7 +51,7 @@ module.exports = {
         const sessionData = JSON.parse(
             await redisClient.get(key)
         );
-        console.log("retrive from redis")
+     //   console.log("retrive from redis")
         return sessionData;
     }
 }

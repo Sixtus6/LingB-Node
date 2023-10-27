@@ -8,7 +8,7 @@ class ChatRoom {
 
     static initChatRoom(socket, io) {
         // console.log(`User  ${socket.id}`);
-        socket.on("create-room", async ({}) => {
+        socket.on("create-room", async ({ }) => {
 
             const chatRoomModel = {
                 roomid: md5(generateid(100000, 999999) + "usernamelingb"),
@@ -34,14 +34,23 @@ class ChatRoom {
             roomids.push(chatRoomModel.roomid);
             await saveAllRoomID(roomids);
             //const chatroom = await getRedis(chatRoomModel.roomid);
-          
+
             socket.join(chatRoomModel.roomid);
             io.to(chatRoomModel.roomid).emit("room-msg", chatRoomModel);
 
-        
+
         })
 
-        socket.on("join-room", async ({ username, language }) => { 
+        socket.on("join-room", async ({ username, language, roomid }) => {
+            let chatroom = await getRedis(roomid);
+            if (!chatroom) {
+                socket.emit(
+                    "join-room-error",
+                    "Chatroom id is invalid"
+                );
+                return
+            }
+            console.log(chatroom)
 
             let user = {
                 socketID: socket.id,
@@ -50,10 +59,12 @@ class ChatRoom {
                 status: "online",
                 messages: []
             };
-
-            chatRoomModel.users.push(user);
+            chatroom.users.push(user);
+            chatroom.activeusers.count = chatroom.users.length
+            await saveRedis(chatroom);
+            console.log(chatroom);
         }
-        
+
         )
 
         socket.on("disconnect", () => {
