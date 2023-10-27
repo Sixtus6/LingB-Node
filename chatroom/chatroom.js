@@ -8,10 +8,10 @@ class ChatRoom {
 
     static initChatRoom(socket, io) {
         // console.log(`User  ${socket.id}`);
-        socket.on("create-room", async ({ username, language }) => {
+        socket.on("create-room", async ({}) => {
 
             const chatRoomModel = {
-                roomid: md5(generateid(100000, 999999) + username),
+                roomid: md5(generateid(100000, 999999) + "usernamelingb"),
                 users: [],
                 get activeusers() {
                     return {
@@ -20,15 +20,15 @@ class ChatRoom {
                 }
             };
 
-            let user = {
-                socketID: socket.id,
-                userName: username,
-                language: language,
-                status: "online",
-                messages: []
-            };
+            // let user = {
+            //     socketID: socket.id,
+            //     userName: username,
+            //     language: language,
+            //     status: "online",
+            //     messages: []
+            // };
 
-            chatRoomModel.users.push(user);
+            // chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
             const roomids = await getRedis("roomids") ?? [];
             roomids.push(chatRoomModel.roomid);
@@ -41,6 +41,7 @@ class ChatRoom {
         
         })
 
+        socket.on("join-room", async ({ username, language}) => { })
 
         socket.on("disconnect", () => {
             // When a user disconnects
