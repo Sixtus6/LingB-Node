@@ -69,10 +69,10 @@ class ChatRoom {
             io.to(chatroom.roomid).emit("room-msg", chatroom);
         })
 
-ch
-        socket.on("chat-room", async ({ roomid, message, socketid}) => {
+        /* -------------------------------- chat room ------------------------------- */
+        socket.on("chat-room", async ({ roomid, message, socketid }) => {
 
-         })
+        })
 
 
 
