@@ -38,8 +38,7 @@ class ChatRoom {
             socket.join(chatRoomModel.roomid);
             io.to(chatRoomModel.roomid).emit("room-msg", chatRoomModel);
 
-            // const allrooms = await getRedis("roomids");
-            // console.log(chatroom, chatRoomModel.roomid)
+        
         })
 
 
