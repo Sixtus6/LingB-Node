@@ -44,7 +44,7 @@ class ChatRoom {
         socket.on("disconnect", () => {
             // When a user disconnects
             console.log(`User disconnected from room: ${socket.id}`);
-            updateOfflineStatus();
+            updateOfflineStatus(socket.id);
             //  delete onlineUsers[socket.id];
         });
 
