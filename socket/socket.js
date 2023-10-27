@@ -36,11 +36,11 @@ class Socket {
             // Scrabble.gamefunction(this.socket, this.io);
             // Ludo.gamefuntion(this.socket, this.io);
             // Snooker.gamefuntion(this.socket, this.io);
-            socket.on("disconnect", () => {
-                // When a user disconnects
-                console.log(`User disconnected: ${socket.id}`);
-              //  delete onlineUsers[socket.id];
-              });
+            // socket.on("disconnect", () => {
+            //     // When a user disconnects
+            //     console.log(`User disconnected: ${socket.id}`);
+            //   //  delete onlineUsers[socket.id];
+            //   });
         });
         callback(this.server);
     }

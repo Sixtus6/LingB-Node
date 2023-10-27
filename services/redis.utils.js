@@ -41,6 +41,13 @@ module.exports = {
     },
 
     getRedis: async function (key) {
+        if (!isconnected) {
+            (async () => {
+                await redisClient.connect();
+            })();
+            isconnected = true;
+            console.log(`connected successfully to Redis`);
+        } else { }
         const sessionData = JSON.parse(
             await redisClient.get(key)
         );

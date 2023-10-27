@@ -1,6 +1,7 @@
 const md5 = require("md5");
 const { generateid } = require("../services/generateid");
 const { saveRedis, getRedis, saveAllRoomID } = require("../services/redis.utils");
+const { updateOfflineStatus } = require("../services/helper");
 
 
 class ChatRoom {
@@ -27,7 +28,7 @@ class ChatRoom {
             };
             chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
-            const roomids =  await getRedis("roomids") ?? [];
+            const roomids = await getRedis("roomids") ?? [];
             roomids.push(chatRoomModel.roomid);
             await saveAllRoomID(roomids);
             const chatroom = await getRedis(chatRoomModel.roomid);
@@ -43,6 +44,7 @@ class ChatRoom {
         socket.on("disconnect", () => {
             // When a user disconnects
             console.log(`User disconnected from room: ${socket.id}`);
+            updateOfflineStatus();
             //  delete onlineUsers[socket.id];
         });
 
