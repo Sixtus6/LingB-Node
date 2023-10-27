@@ -41,7 +41,20 @@ class ChatRoom {
         
         })
 
-        socket.on("join-room", async ({ username, language}) => { })
+        socket.on("join-room", async ({ username, language }) => { 
+
+            let user = {
+                socketID: socket.id,
+                userName: username,
+                language: language,
+                status: "online",
+                messages: []
+            };
+
+            chatRoomModel.users.push(user);
+        }
+        
+        )
 
         socket.on("disconnect", () => {
             // When a user disconnects
