@@ -8,6 +8,8 @@ class ChatRoom {
 
     static initChatRoom(socket, io) {
         // console.log(`User  ${socket.id}`);
+
+        /* ------------------------------ create-rooom ------------------------------ */
         socket.on("create-room", async ({ }) => {
 
             const chatRoomModel = {
@@ -40,7 +42,8 @@ class ChatRoom {
 
 
         })
-/* -------------------------------- join room ------------------------------- */
+
+        /* -------------------------------- join room ------------------------------- */
         socket.on("join-room", async ({ username, language, roomid }) => {
             let chatroom = await getRedis(roomid);
             if (!chatroom) {
@@ -64,9 +67,12 @@ class ChatRoom {
             await saveRedis(chatroom);
             socket.join(chatroom.roomid);
             io.to(chatroom.roomid).emit("room-msg", chatroom);
-        }
+        })
 
-        )
+ch
+        socket.on("chat-room", async ({ roomid, message, socketid}) => {
+
+         })
 
 
 
