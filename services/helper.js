@@ -1,8 +1,5 @@
 const { getRedis, saveRedis } = require("./redis.utils");
 
-
-
-
 module.exports = {
     updateOfflineStatus: async function (socketID) {
         try {
