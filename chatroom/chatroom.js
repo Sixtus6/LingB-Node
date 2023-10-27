@@ -34,9 +34,12 @@ class ChatRoom {
             roomids.push(chatRoomModel.roomid);
             await saveAllRoomID(roomids);
             //const chatroom = await getRedis(chatRoomModel.roomid);
-          //  socket.join(gameSessionId);
-           // const allrooms = await getRedis("roomids");
-            console.log(chatroom, chatRoomModel.roomid)
+          
+            socket.join(chatRoomModel.roomid);
+            io.to(chatRoomModel.roomid).emit("room-msg", chatRoomModel);
+
+            // const allrooms = await getRedis("roomids");
+            // console.log(chatroom, chatRoomModel.roomid)
         })
 
 
