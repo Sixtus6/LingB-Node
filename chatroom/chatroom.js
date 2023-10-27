@@ -19,7 +19,7 @@ class ChatRoom {
                     };
                 }
             };
-            
+
             let user = {
                 socketID: socket.id,
                 userName: username,
@@ -33,9 +33,10 @@ class ChatRoom {
             const roomids = await getRedis("roomids") ?? [];
             roomids.push(chatRoomModel.roomid);
             await saveAllRoomID(roomids);
-            const chatroom = await getRedis(chatRoomModel.roomid);
-            const allrooms = await getRedis("roomids");
-            console.log(chatroom, allrooms)
+            //const chatroom = await getRedis(chatRoomModel.roomid);
+          //  socket.join(gameSessionId);
+           // const allrooms = await getRedis("roomids");
+            console.log(chatroom, chatRoomModel.roomid)
         })
 
 
