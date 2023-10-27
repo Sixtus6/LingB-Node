@@ -1,7 +1,13 @@
 require('dotenv').config(); 
-const { Translate } = require('@google-cloud/translate');
-const apiKey = process.REDIS_HOST;
+const { TranslationServiceClient } = require('@google-cloud/translate');
+const translationClient = new TranslationServiceClient();
+const { googleapi } = require('../key');
+const apiKey = googleapi;
 console.log(apiKey)
+
+class Transalator {
+    
+}
 // const translate = new Translate({
 //     key: apiKey, // Provide your API key
 //   });
