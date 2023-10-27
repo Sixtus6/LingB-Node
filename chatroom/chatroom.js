@@ -49,7 +49,7 @@ class ChatRoom {
             if (!chatroom) {
                 socket.emit(
                     "join-room-error",
-                    "Chatroom id is invalid"
+                    "chatroom id is invalid"
                 );
                 return
             }
@@ -75,13 +75,23 @@ class ChatRoom {
             if (!chatroom) {
                 socket.emit(
                     "chat-room-error",
-                    "Chatroom id is invalid"
+                    "chatroom id is invalid"
                 );
                 return
             }
             const user = chatroom.users.find((u) => u.socketID === socketid);
-
-            
+            if (!user) {
+                socket.emit(
+                    "chat-room-error",
+                    "socket id is invalid"
+                );
+            }
+            let mssg = {
+                eng: message
+                igbo:
+            }
+            user.messages.push(message);
+            console.log(user)
         })
 
 
