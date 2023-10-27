@@ -12,22 +12,25 @@ class ChatRoom {
             const chatRoomModel = {
                 roomid: md5(generateid(100000, 999999) + username),
                 users: [],
+                get activeusers() {
+                    return {
+                        count: this.users.length,
+                    };
+                }
             };
             let user = {
                 socketID: socket.id,
                 userName: username,
                 language: language,
+                status: "online",
                 messages: []
             };
             chatRoomModel.users.push(user);
             await saveRedis(chatRoomModel);
-            const await getRedis(chatRoomModel.roomid)
-            console.log(chatRoomModel)
-            console.log(username, language,);
-
-            console.log(`User connected created a room: ${socket.id}`);
+            const chatroom = await getRedis(chatRoomModel.roomid);
 
         })
+
 
         socket.on("disconnect", () => {
             // When a user disconnects

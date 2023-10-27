@@ -9,7 +9,6 @@ module.exports = {
     saveRedis: async function (data) {
         try {
             if (!isconnected) {
-
                 (async () => {
                     await redisClient.connect();
                 })();
@@ -17,7 +16,6 @@ module.exports = {
                 console.log(`connected successfully to Redis`);
             } else { }
             const value = JSON.stringify(data);
-            console.log(value)
             await redisClient.set(data.roomid, value);
             console.log("save to redis")
         } catch (error) {
@@ -25,9 +23,11 @@ module.exports = {
         }
     },
 
-    getRedis: async function (data) {
+    save
+
+    getRedis: async function (key) {
         const sessionData = JSON.parse(
-            await redisClient.get(data.roomid)
+            await redisClient.get(key)
         );
         console.log("retrive from redis")
         return sessionData;
