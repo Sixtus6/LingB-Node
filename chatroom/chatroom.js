@@ -53,8 +53,7 @@ class ChatRoom {
                 );
                 return
             }
-         
-
+            
             let user = {
                 socketID: socket.id,
                 userName: username,
