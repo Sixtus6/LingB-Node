@@ -45,7 +45,7 @@ class ChatRoom {
         })
 
         /* -------------------------------- join room ------------------------------- */
-        socket.on("join-room", async ({ username, language, roomid }) => {
+        socket.on("join-room", async ({ username, roomid }) => {
             let chatroom = await getRedis(roomid);
             if (!chatroom) {
                 socket.emit(
@@ -58,7 +58,7 @@ class ChatRoom {
             let user = {
                 socketID: socket.id,
                 userName: username,
-                language: language,
+                language: {en: "english", yo: "yoruba", ig:"igbo", ha: "hausa"},
                 status: "online",
                 messages: []
             };
