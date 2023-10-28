@@ -2,6 +2,7 @@ const md5 = require("md5");
 const { generateid } = require("../services/generateid");
 const { saveRedis, getRedis, saveAllRoomID } = require("../services/redis.utils");
 const { updateOfflineStatus } = require("../services/helper");
+const { translator } = require("../services/translator");
 
 
 class ChatRoom {
@@ -53,7 +54,7 @@ class ChatRoom {
                 );
                 return
             }
-            
+
             let user = {
                 socketID: socket.id,
                 userName: username,
@@ -87,10 +88,12 @@ class ChatRoom {
                     "socket id is invalid"
                 );
             }
+            // yo,  ig, ha
             let mssg = {
                 eng: message,
-                igbo: "",
-                hausa: ""
+                igbo: await translator(message, "ig"),
+                hausa: await translator(message, "ha"),
+                yoruba: await translator(message, "yo"),
             }
             user.messages.push(mssg);
             console.log(user)

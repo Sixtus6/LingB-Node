@@ -3,6 +3,8 @@ const config = require("./config/env.config");
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const { translator } = require("./services/translator");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -22,7 +24,9 @@ app.use(function (req, res, next) {
 
 
 AppSocket.initSocket(app, (server) => {
-    server.listen(config.port, () => {
+  
+  server.listen(config.port, () => {
+    // translator()
       console.log("app listening at port %s", config.port);
     });
   });
