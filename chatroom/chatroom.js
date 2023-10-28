@@ -99,7 +99,7 @@ class ChatRoom {
             console.log(user)
             await saveRedis(chatroom);
             socket.join(chatroom.roomid);
-            io.to(chatroom.roomid).emit("room-msg", chatroom);
+            io.to(chatroom.roomid).emit("chat-room-msg", chatroom);
         })
 
 
