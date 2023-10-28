@@ -5,12 +5,12 @@ const text = 'good morning!';
 const targetLanguage = 'yo';
 // yo,  ig, ha
 module.exports = {
-    translator: async function (message, ) {
+    translator: async function (message, language) {
         try {
             const url = 'https://translation.googleapis.com/language/translate/v2';
             const data = {
-                q: text,
-                target: targetLanguage,
+                q: message,
+                target: language,
             };
 
             const response = await axios.post(url, data, {
@@ -21,8 +21,9 @@ module.exports = {
 
             if (response.status === 200) {
                 const translation = response.data.data.translations[0].translatedText;
-                console.log(`Text: ${text}`);
-                console.log(`Translation: ${translation}`);
+                // console.log(`Text: ${text}`);
+                // console.log(`Translation: ${translation}`);
+                return translation
             } else {
                 console.error('Error translating text:', response.statusText);
             }
