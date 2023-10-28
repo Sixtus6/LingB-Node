@@ -39,7 +39,7 @@ class ChatRoom {
             //const chatroom = await getRedis(chatRoomModel.roomid);
 
             socket.join(chatRoomModel.roomid);
-            io.to(chatRoomModel.roomid).emit("room-msg", chatRoomModel);
+            io.to(chatRoomModel.roomid).emit("create-room-msg", chatRoomModel);
 
 
         })
