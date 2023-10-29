@@ -50,22 +50,30 @@ class ChatRoom {
             if (!chatroom) {
                 socket.emit(
                     "join-room-error",
-                    "chatroom id is invalid"
+                    "chat-room id is invalid"
                 );
                 return
             }
-
+            const usernameExist = chatroom.users.find((u) => u.userName === username);
+            if (usernameExist) {
+                socket.emit(
+                    "join-room-error",
+                    "username taken by another user"
+                );
+                return
+            }
             let user = {
                 socketID: socket.id,
                 userName: username,
-                language: {en: "english", yo: "yoruba", ig:"igbo", ha: "hausa"},
+                language: { en: "english", yo: "yoruba", ig: "igbo", ha: "hausa" },
                 status: "online",
                 messages: []
             };
+
             chatroom.users.push(user);
             chatroom.activeusers.count = chatroom.users.length
             await saveRedis(chatroom);
-            
+
             socket.join(chatroom.roomid);
             io.to(chatroom.roomid).emit("join-room-msg", chatroom.users);
             console.log(chatroom)
@@ -77,7 +85,7 @@ class ChatRoom {
             if (!chatroom) {
                 socket.emit(
                     "chat-room-error",
-                    "chatroom id is invalid"
+                    "chat-room id is invalid"
                 );
                 return
             }
@@ -87,6 +95,7 @@ class ChatRoom {
                     "chat-room-error",
                     "socket id is invalid"
                 );
+                return
             }
             // yo,  ig, ha
             let mssg = {
@@ -96,6 +105,7 @@ class ChatRoom {
                 yoruba: await translator(message, "yo"),
             }
             user.messages.push(mssg);
+            chatroom.messages.push(mssg)
             console.log(user)
             await saveRedis(chatroom);
             socket.join(chatroom.roomid);
