@@ -20,7 +20,8 @@ class ChatRoom {
                     return {
                         count: this.users.length,
                     };
-                }
+                },
+                messages: []
             };
 
             // let user = {
@@ -99,12 +100,14 @@ class ChatRoom {
             }
             // yo,  ig, ha
             let mssg = {
+                username: user.userName,
+                socketID: user.socketID,
                 eng: message,
                 igbo: await translator(message, "ig"),
                 hausa: await translator(message, "ha"),
                 yoruba: await translator(message, "yo"),
             }
-            user.messages.push(mssg);
+            //  user.messages.push(mssg);
             chatroom.messages.push(mssg)
             console.log(user)
             await saveRedis(chatroom);
