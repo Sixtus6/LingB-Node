@@ -102,10 +102,12 @@ class ChatRoom {
             let mssg = {
                 username: user.userName,
                 socketID: user.socketID,
-                eng: message,
+                eng: await translator(message, "en"),
+                local: message,
                 igbo: await translator(message, "ig"),
                 hausa: await translator(message, "ha"),
                 yoruba: await translator(message, "yo"),
+
             }
             //  user.messages.push(mssg);
             chatroom.messages.push(mssg)
