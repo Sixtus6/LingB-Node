@@ -1,19 +1,11 @@
-# Project Name
+# LingB Node
 
-Brief description or introduction to your project.
-
+Using Node.js and Socket.IO, our chat app (LingB) backend supports seamless communication in users preferred local languages. This feature allows individuals speaking different languages to connect and chat effortlessly, breaking down language barriers for meaningful interactions.
 ## Installation
 
-Instructions on how to install or set up your project.
+git clone https://github.com/Sixtus6/LingB-Node.git.
 
 ## Usage
 
-Guidelines on how to use the project.
+node index.js.
 
-## Contributing
-
-Instructions for others who might want to contribute to your project.
-
-## License
-
-Information about the project's license (if any).
